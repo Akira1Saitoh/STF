@@ -430,6 +430,9 @@ my ($now, $date, $time) = stf::stfUtility->getNow(date => $TRUE, time => $TRUE);
     my $log4j_api_dir = findElement($prereqs_root, "/log4j/log4j-api.jar");
     my $cmd = "$javahome_generation/bin/java " .
               "$java_debug_settings" .
+              ' -Xdump:system+java+jit:events=throw+systhrow+catch,filter=java/lang/NullPointerException#java/lang/invoke/LambdaForm*,request=serial+preempt' .
+              " -Djava.lang.invoke.MethodHandle.TRACE_RESOLVE=true " .
+              " -Djava.lang.invoke.MethodHandle.TRACE_METHOD_LINKAGE=true " .
               " -Dlog4j.skipJansi=true" .  # Suppress warning on Windows
               " -Djava.system.class.loader=net.adoptopenjdk.stf.runner.StfClassLoader" .
               " -classpath $log4j_api_dir" . $sep . "$log4j_core_dir" . $sep . "$Bin/../bin" .
@@ -463,6 +466,8 @@ my ($now, $date, $time) = stf::stfUtility->getNow(date => $TRUE, time => $TRUE);
 	_log("");
     _log("Script generation completed");
     _log("");
+
+    exit 0;
    
     # Read names of execute scripts to run from text file
     my @executeStages = ();
