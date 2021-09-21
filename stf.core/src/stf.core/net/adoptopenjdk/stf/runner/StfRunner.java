@@ -67,6 +67,11 @@ public class StfRunner {
 		try {
 			StfRunner runner = new StfRunner(args);
 			runner.executeTest();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+			
+			}	
 			System.exit(0);
 		} catch (StfError e) {
 			String boldStart = PlatformFinder.isLinux() ? "\u001B[1m" : "";
