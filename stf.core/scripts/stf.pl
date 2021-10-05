@@ -430,7 +430,6 @@ my ($now, $date, $time) = stf::stfUtility->getNow(date => $TRUE, time => $TRUE);
     my $log4j_api_dir = findElement($prereqs_root, "/log4j/log4j-api.jar");
     my $cmd = " env TR_DisableUseKnownObjectTempsForParmsInCallee=1  $javahome_generation/bin/java " .
               "$java_debug_settings" .
-              " '-Xjit:{net/adoptopenjdk/stf/environment/properties/OrderedProperties.getProperty(Ljava/lang/String;)Ljava/lang/String;}(traceFull,traceInlining,debugInliner,log=getProperty.log)' ".
               ' -Xdump:system+java+jit:events=throw+systhrow+catch,filter=java/lang/NullPointerException#java/lang/invoke/LambdaForm*,request=exclusive+prepwalk+serial+preempt' .
               " -Dlog4j.skipJansi=true" .  # Suppress warning on Windows
               " -Djava.system.class.loader=net.adoptopenjdk.stf.runner.StfClassLoader" .
