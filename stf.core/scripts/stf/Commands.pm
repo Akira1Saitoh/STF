@@ -414,6 +414,7 @@ sub monitor_processes {
 		}
 
 		if ($not_all_finished == 1) {
+			my $before_sleep = timelocal( localtime() );
 			# Use the HiRes perl module if available otherwise sleep for 1 sec
 			if ($useHiRes) {
 				# Work out how long to sleep for. This tries to strike a balance between avoiding 
@@ -431,6 +432,11 @@ sub monitor_processes {
 			}
 			else {
 				sleep 1;
+			}
+			my $after_sleep = timelocal( localtime() );
+			my $actual_interval = $after_sleep - $before_sleep;
+			if ($actual_interval > 10) {
+				info("Actual interval is $actual_interval");
 			}
 		}
 		else {

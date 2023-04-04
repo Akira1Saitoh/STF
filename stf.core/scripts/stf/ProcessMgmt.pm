@@ -279,7 +279,7 @@ sub monitorProcess {
 		if ($elapsed > $runtime) {
 			$p->{timeout} = $TRUE;
 			
-			err("**FAILED** Process $p->{uid} has timed out");
+			err("**FAILED** Process $p->{uid} has timed out, elapsed = $elapsed, runtime = $runtime, starttime = $starttime");
 			
 			$results{status} = $FAILURE;
 		}
